@@ -6,7 +6,7 @@ import unittest
 from core.extension.HTMLTestRunner import HTMLTestRunner
 
 # 当前文件路径
-current_path = os.getcwd()
+current_path = os.path.abspath(os.path.dirname(__file__))
 # 获取当前文件的上级路径
 parent_path = os.path.dirname(current_path)
 # 测试用例的路径

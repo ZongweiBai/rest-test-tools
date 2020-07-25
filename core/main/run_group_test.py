@@ -20,10 +20,10 @@ from core.util.log_printer import Logger
 
 class RunGroupTest:
 
-    def __init__(self):
+    def __init__(self, file_name='../../case/interface.xls'):
         self.logger = Logger(use_console=False).logger
         self.run_method = RequestHttp()
-        self.data = GetData()
+        self.data = GetData(file_name=file_name)
         self.com_util = CommonUtil()
         self.send_mail = SendEmail()
 
@@ -98,11 +98,11 @@ class RunGroupTest:
                 # 将异常写入excel的测试结果中
                 self.data.write_result(i, str(e))
                 # 将报错写入指定路径的日志文件里
-                # with open(log_file, 'a', encoding='utf-8') as f:
-                #     f.write("\n第%s条用例报错:\n" % i)
                 self.logger.error(("第%s条用例报错:" % i))
                 self.logger.exception(e)
                 fail_count.append(i)
+                # 手动抛出异常
+                raise Exception(print(e))
 
         # self.send_mail.send_main(pass_count,fail_count,no_run_count)
 

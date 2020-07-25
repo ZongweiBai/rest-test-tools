@@ -4,7 +4,7 @@ from xlutils.copy import copy
 
 
 class OperationExcel:
-    def __init__(self, file_name=None, sheet_id=None):
+    def __init__(self, file_name=None, sheet_id=0):
         if file_name:
             self.file_name = file_name
             self.sheet_id = sheet_id

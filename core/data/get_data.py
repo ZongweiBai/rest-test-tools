@@ -1,12 +1,19 @@
 # coding:utf-8
+import os
+
 from core.data import data_config
 from core.util.operation_excel import OperationExcel
 from core.util.operation_json import OperationJson
 
 
 class GetData:
-    def __init__(self):
-        self.oper_excel = OperationExcel()
+    def __init__(self, file_name=None):
+        # 当前文件路径
+        self.current_path = os.path.abspath(os.path.dirname(__file__))
+        # 获取当前文件的上级路径
+        self.parent_path = os.path.dirname(self.current_path)
+        self.parent_path = os.path.dirname(self.parent_path)
+        self.oper_excel = OperationExcel(file_name=file_name)
 
     # 去获取excel行数，就是case个数
     def get_case_lines(self):
@@ -46,7 +53,8 @@ class GetData:
 
     # 通过获取头关键字拿到data数据
     def get_header_value(self, row):
-        oper_json = OperationJson('../../dataconfig/request_header.json')
+        request_header_file = os.path.join(self.parent_path, 'dataconfig/request_header.json')
+        oper_json = OperationJson(request_header_file)
         request_header = oper_json.get_data(self.get_request_header(row))
         return request_header
 
@@ -60,7 +68,8 @@ class GetData:
 
     # 通过获取请求关键字拿到data数据
     def get_data_value(self, row):
-        oper_json = OperationJson('../../dataconfig/request_data.json')
+        request_data_file = os.path.join(self.parent_path, 'dataconfig/request_data.json')
+        oper_json = OperationJson(request_data_file)
         request_data = oper_json.get_data(self.get_request_data(row))
         return request_data
 
