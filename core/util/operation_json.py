@@ -27,7 +27,7 @@ class OperationJson:
 
     # 将cookies数据写入json文件
     def write_data(self, data):
-        with open('../dataconfig/cookie.json', 'w') as fp:
+        with open('../../dataconfig/cookie.json', 'w') as fp:
             fp.write(json.dumps(data))
 
 

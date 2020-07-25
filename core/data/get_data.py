@@ -1,7 +1,7 @@
 # coding:utf-8
-from data import data_config
-from util.operation_excel import OperationExcel
-from util.operation_json import OperationJson
+from core.data import data_config
+from core.util.operation_excel import OperationExcel
+from core.util.operation_json import OperationJson
 
 
 class GetData:
@@ -46,7 +46,7 @@ class GetData:
 
     # 通过获取头关键字拿到data数据
     def get_header_value(self, row):
-        oper_json = OperationJson('../dataconfig/request_header.json')
+        oper_json = OperationJson('../../dataconfig/request_header.json')
         request_header = oper_json.get_data(self.get_request_header(row))
         return request_header
 
@@ -60,7 +60,7 @@ class GetData:
 
     # 通过获取请求关键字拿到data数据
     def get_data_value(self, row):
-        oper_json = OperationJson('../dataconfig/request_data.json')
+        oper_json = OperationJson('../../dataconfig/request_data.json')
         request_data = oper_json.get_data(self.get_request_data(row))
         return request_data
 

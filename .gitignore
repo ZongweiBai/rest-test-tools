@@ -221,3 +221,4 @@ log/*.log
 log/*.log.*
 !/.gitignore
 !/.gitignore
+test_report/

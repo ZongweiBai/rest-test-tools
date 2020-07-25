@@ -1,9 +1,9 @@
 # coding:utf-8
 from jsonpath_rw import parse
 
-from data.get_data import GetData
-from util.operation_excel import OperationExcel
-from util.runmethod import RunMethod
+from core.data.get_data import GetData
+from core.util.operation_excel import OperationExcel
+from core.util.request_http import RequestHttp
 
 
 class DependentData:
@@ -11,7 +11,7 @@ class DependentData:
     def __init__(self, case_id):
         self.case_id = case_id
         self.oper_excel = OperationExcel()
-        self.method = RunMethod()
+        self.method = RequestHttp()
         self.data = GetData()
 
     # 通过case_id去获取依赖case_id的整行数据
@@ -26,7 +26,7 @@ class DependentData:
         header = self.data.get_request_header(row_num)
         method = self.data.get_request_method(row_num)
         url = self.data.get_request_url(row_num)
-        res = self.method.run_main(method, url, request_data, header, params=request_data)
+        res = self.method.execute(method, url, request_data, header, params=request_data)
         return res
 
     # 获取依赖字段的响应数据：通过执行依赖测试case来获取响应数据，响应中某个字段数据作为依赖key的value

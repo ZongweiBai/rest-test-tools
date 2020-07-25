@@ -2,7 +2,7 @@
 
 import requests
 
-from util.operation_json import OperationJson
+from core.util.operation_json import OperationJson
 
 
 class OperationHeader:

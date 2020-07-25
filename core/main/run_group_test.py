@@ -7,22 +7,22 @@ curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
-from util.runmethod import RunMethod
-from data.get_data import GetData
-from util.common_assert import CommonUtil
+from core.util.request_http import RequestHttp
+from core.data.get_data import GetData
+from core.util.common_assert import CommonUtil
 import json
-from data.dependent_data import DependentData
-from util.send_mail import SendEmail
-from util.operation_header import OperationHeader
-from util.operation_json import OperationJson
-from util.log_printer import Logger
+from core.data.dependent_data import DependentData
+from core.util.send_mail import SendEmail
+from core.util.operation_header import OperationHeader
+from core.util.operation_json import OperationJson
+from core.util.log_printer import Logger
 
 
-class RunTest:
+class RunGroupTest:
 
     def __init__(self):
         self.logger = Logger(use_console=False).logger
-        self.run_method = RunMethod()
+        self.run_method = RequestHttp()
         self.data = GetData()
         self.com_util = CommonUtil()
         self.send_mail = SendEmail()
@@ -34,12 +34,6 @@ class RunTest:
         fail_count = []
         no_run_count = []
         rows_count = self.data.get_case_lines()
-
-        # 每次执行用例之前将log日志文件清空数据
-        # log_file = '../log/log.txt'
-        # with open(log_file, 'w') as f:
-        #     f.seek(0, 0)  # 加上f.seek(0)，把文件定位到position 0;没有这句的话，文件是定位到数据最后，truncate也是从最后这里删除
-        #     f.truncate()
 
         for i in range(1, rows_count):
             try:
@@ -67,18 +61,18 @@ class RunTest:
 
                     # cookie相关的没有跑通，代码逻辑是正常的，但是模拟登陆返回一直是非法请求
                     if header_key == 'write_Cookies':
-                        res = self.run_method.run_main(method, url, data, header, params=data)
+                        res = self.run_method.execute(method, url, data, header, params=data)
                         op_header = OperationHeader(res)
                         op_header.write_cookie()
 
                     elif header_key == 'get_Cookies':
-                        op_json = OperationJson('../dataconfig/cookie.json')
+                        op_json = OperationJson('../../dataconfig/cookie.json')
                         cookie = op_json.get_data('apsid')
                         cookies = {'apsid': cookie}
-                        res = self.run_method.run_main(method, url, data, header=cookies, params=data)
+                        res = self.run_method.execute(method, url, data, header=cookies, params=data)
 
                     else:
-                        res = self.run_method.run_main(method, url, data, header, params=data)
+                        res = self.run_method.execute(method, url, data, header, params=data)
 
                     '''
                     get请求参数是params:request.get(url='',params={}),post请求数据是data:request.post(url='',data={})
@@ -114,5 +108,5 @@ class RunTest:
 
 
 if __name__ == '__main__':
-    run = RunTest()
+    run = RunGroupTest()
     run.go_on_run()

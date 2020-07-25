@@ -12,4 +12,4 @@
 
 （5）main：脚本执行的主函数run_test.py
 
-（6）util：通用方法的封装，各种不同断言方式common_assert.py；对excel文件的读写操作operation_excel.py；从请求返回数据中拿取数据作为下一个接口的请求header数据operation_header.py；从json文件中拿取想要的数据operation_json.py；将接口自动化过程中的相关日志输出到log.txt中print_log.py；根据请求类型的不同执行对应的get/post方法runmethod.py；将测试结果以邮件形式发送给相关人员send_mail.py。
+（6）util：通用方法的封装，各种不同断言方式common_assert.py；对excel文件的读写操作operation_excel.py；从请求返回数据中拿取数据作为下一个接口的请求header数据operation_header.py；从json文件中拿取想要的数据operation_json.py；将接口自动化过程中的相关日志输出到log.txt中log_printer.py；根据请求类型的不同执行对应的get/post方法runmethod.py；将测试结果以邮件形式发送给相关人员send_mail.py。
