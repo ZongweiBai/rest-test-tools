@@ -1,15 +1,20 @@
 # coding:utf-8
+import os
+
 import xlrd
 from xlutils.copy import copy
+
+from core.core_config import CoreConfig
 
 
 class OperationExcel:
     def __init__(self, file_name=None, sheet_id=0):
+        core_config = CoreConfig()
         if file_name:
             self.file_name = file_name
             self.sheet_id = sheet_id
         else:
-            self.file_name = '../../case/interface.xls'
+            self.file_name = os.path.join(core_config.test_case_file_path, 'interface.xls')
             self.sheet_id = 0
         self.data = self.get_data()
 

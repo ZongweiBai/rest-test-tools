@@ -5,6 +5,7 @@ import logging.handlers
 import os
 import sys
 import time
+from core.core_config import CoreConfig
 
 
 class Logger:
@@ -12,11 +13,8 @@ class Logger:
                  name=os.path.split(os.path.splitext(sys.argv[0])[0])[-1],
                  log_name=time.strftime("%Y-%m-%d-%H.log", time.localtime()),
                  use_console=True):
-        current_path = os.path.abspath(os.path.dirname(__file__))
-        # 获取当前文件的上级路径
-        parent_path = os.path.dirname(current_path)
-        parent_path = os.path.dirname(parent_path)
-        log_path = os.path.join(parent_path, 'log')
+        core_config = CoreConfig()
+        log_path = core_config.log_path
         """
         :param set_level: 日志级别["NOTSET"|"DEBUG"|"INFO"|"WARNING"|"ERROR"|"CRITICAL"]，默认为INFO
         :param name: 日志中打印的name，默认为运行程序的name
