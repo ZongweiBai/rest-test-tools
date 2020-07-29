@@ -5,6 +5,7 @@ import unittest
 import requests
 
 from core.main.run_group_test import RunGroupTest
+from core.core_config import CoreConfig
 
 
 class Demo(unittest.TestCase):
@@ -22,4 +23,9 @@ class Demo(unittest.TestCase):
         parent_path = os.path.dirname(current_path)
         test_case_excel = os.path.join(parent_path, 'case/interface.xls')
         runtest = RunGroupTest(test_case_excel)
+        runtest.go_on_run()
+
+    def test_oauth_acl(self):
+        core_config = CoreConfig()
+        runtest = RunGroupTest(os.path.join(core_config.test_case_file_path, 'oauth_server_test.xls'), 0)
         runtest.go_on_run()

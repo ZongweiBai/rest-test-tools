@@ -1,10 +1,14 @@
 # coding:utf-8
+
+import os
 import json
+from core.core_config import CoreConfig
 
 
 class OperationJson:
 
     def __init__(self, file_path):
+        self.core_config = CoreConfig()
         self.file_path = file_path
         self.data = self.read_data()
 
@@ -27,7 +31,7 @@ class OperationJson:
 
     # 将cookies数据写入json文件
     def write_data(self, data):
-        with open('../../dataconfig/cookie.json', 'w') as fp:
+        with open(os.path.join(self.core_config.data_config_path, 'cookie.json'), 'w') as fp:
             fp.write(json.dumps(data))
 
 

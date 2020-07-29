@@ -9,6 +9,7 @@ from core.extension.HTMLTestRunner import HTMLTestRunner
 # 获取全局的路径定义
 core_config = CoreConfig()
 
+
 # 找出以test开头的用例
 def discovery_test_case():
     discover = unittest.defaultTestLoader.discover(core_config.test_case_path, pattern='test*.py')

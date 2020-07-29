@@ -8,17 +8,21 @@ from core.util.operation_json import OperationJson
 
 
 class GetData:
-    def __init__(self, file_name=None):
+    def __init__(self, file_name=None, sheet_id=0):
         self.core_config = CoreConfig()
-        self.oper_excel = OperationExcel(file_name=file_name)
+        self.oper_excel = OperationExcel(file_name=file_name, sheet_id=sheet_id)
 
     # 去获取excel行数，就是case个数
     def get_case_lines(self):
         return self.oper_excel.get_lines()
 
-    # 获取是否执行
+    # 获取ID定义
+    def get_request_id(self, row):
+        col = int(data_config.get_id())
+        return self.oper_excel.get_cell_value(row, col)
+
+    # 获取是否需要执行
     def get_is_run(self, row):
-        flag = None
         col = int(data_config.get_run())
         run_model = self.oper_excel.get_cell_value(row, col)
         if run_model == 'yes':
