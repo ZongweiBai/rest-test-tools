@@ -2,9 +2,11 @@
 import os
 
 
-# 全局变量
-
 class CoreConfig:
+    """
+    全局变量
+    """
+
     def __init__(self):
         # core目录所在的绝对路径
         self.core_path = os.path.abspath(os.path.dirname(__file__))
