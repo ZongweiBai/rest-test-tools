@@ -4,20 +4,7 @@
 
 ## 目录结构如下
 
-├── case											
-├── core											
-│   ├── core_config.py
-│   ├── data
-│   ├── extension
-│   ├── main
-│   ├── run_all_testcases.py
-│   └── util
-├── dataconfig
-├── log
-├── test_case
-│   └── test_demo.py
-├── test_report
-│   └── test_report.html
+![项目目录结构](project_structure.png)
 
 ## 目录结构说明
 
