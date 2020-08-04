@@ -15,8 +15,7 @@ class OperationJson:
     # 读取json文件
     def read_data(self):
         with open(self.file_path) as fp:
-            data = json.load(fp)
-            return data
+            return json.loads(fp.read())
 
     # 根据关键字获取数据
     '''

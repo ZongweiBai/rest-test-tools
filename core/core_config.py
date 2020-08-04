@@ -4,7 +4,7 @@ import os
 
 class CoreConfig:
     """
-    全局变量
+    全局路径变量
     """
 
     def __init__(self):

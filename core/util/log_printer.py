@@ -9,6 +9,10 @@ from core.core_config import CoreConfig
 
 
 class Logger:
+    """
+    日志打印
+    """
+
     def __init__(self, set_level="INFO",
                  name=os.path.split(os.path.splitext(sys.argv[0])[0])[-1],
                  log_name=time.strftime("%Y-%m-%d-%H.log", time.localtime()),

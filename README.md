@@ -1,15 +1,39 @@
-# test-tools
+# restful-test-tools
 
-基于python3的测试工具
+基于python3的Restful API测试工具
 
-（1）case：存放测试用例数据的，比如请求类型get/post、请求url、请求header、请求数据等；
+## 目录结构如下
 
-（2）data：获取excel文件中相应数据的方法封装，获取excel中对应表格内的数据，excel的行列数据等：get_data.py；判断用例之间是否存在依赖关系并获取依赖数据：dependent_data.py；初始化excel文件：data_config.py；
+├── case											
+├── core											
+│   ├── core_config.py
+│   ├── data
+│   ├── extension
+│   ├── main
+│   ├── run_all_testcases.py
+│   └── util
+├── dataconfig
+├── log
+├── test_case
+│   └── test_demo.py
+├── test_report
+│   └── test_report.html
 
-（3）dataconfig：存放请求中涉及到的header、data、cookies等数据；
+## 目录结构说明
 
-（4）log：存放测试完成之后生成的日志文件，可以查看日志定位问题；
+- case：存放excel，用于定义一组测试用例；
+- core：定义测试用到的路径；获取excel文件中相应数据的方法封装，获取excel中对应表格内的数据；定义工具类；生成测试报告的扩展；run_all_testcases.py运行所有的测试用例并生成测试报告；
 
-（5）main：脚本执行的主函数run_test.py
+- dataconfig：存放请求中涉及到的header、cookies等数据；
 
-（6）util：通用方法的封装，各种不同断言方式common_assert.py；对excel文件的读写操作operation_excel.py；从请求返回数据中拿取数据作为下一个接口的请求header数据operation_header.py；从json文件中拿取想要的数据operation_json.py；将接口自动化过程中的相关日志输出到log.txt中log_printer.py；根据请求类型的不同执行对应的get/post方法runmethod.py；将测试结果以邮件形式发送给相关人员send_mail.py。
+- log：存放测试完成之后生成的日志文件，可以查看日志定位问题；
+
+- test_case：存放unittest测试用例
+
+- test_report：存放测试报告
+
+## 如何使用
+
+1. 自定义case文件夹下的excel；
+2. 自定义test_case下的测试用例，根据场景写单个测试用例或者组测试用例；
+3. 运行run_all_testcases.py获取结果；

@@ -47,31 +47,24 @@ class RunGroupTest:
                     res = self.request_http.execute(excel_data.request_method, excel_data.request_url,
                                                     request_info[0], request_info[1], request_info[2])
 
-                    if excel_data.expect_http_code != res.status_code:
+                    if not excel_data.expect_http_code.__eq__(res.status_code):
                         fail_count.append(index)
-                        self.logger.error(("第%s条用例报错:" % index))
-                        self.logger.exception("第%s条用例Http状态码响应结果与预期结果不一致" % index)
+                        self.logger.error(("第%s条用例实际响应状态码:%s" % (index, res.status_code)))
                         raise Exception("第%s条用例Http状态码响应结果与预期结果不一致" % index)
 
                     # excel中拿到的expect数据是str类型，但是返回的res是dict类型，两者数据比较必须都是字符类型
                     if self.com_util.is_contain(excel_data.expect_http_response, json.dumps(res.json())):
-                        self.data.write_result(index, 'pass')
                         pass_count.append(index)
-
+                        self.logger.info("第%s条用例测试通过" % index)
                         # 将响应放入缓存中
                         self.dependent_data.put_cache(excel_data.test_case_id, res.json())
                     else:
-                        # 返回的res是dict类型，要将res数据写入excel中，需将dict类型转换成str类型
-                        self.data.write_result(index, json.dumps(res.json()))
                         fail_count.append(index)
-                        self.logger.error(("第%s条用例实际响应结果:%s" % index, res.json()))
-                        self.logger.exception("第%s条用例实际结果与预期结果不一致" % index)
+                        self.logger.error(("第%s条用例实际响应结果:%s" % (index, res.json())))
                         raise Exception("第%s条用例实际结果与预期结果不一致" % index)
                 else:
                     no_run_count.append(index)
             except Exception as e:
-                # 将异常写入excel的测试结果中
-                self.data.write_result(index, str(e))
                 # 将报错写入指定路径的日志文件里
                 self.logger.error(("第%s条用例报错:" % index))
                 self.logger.exception(e)

@@ -17,6 +17,10 @@ def discovery_test_case():
 
 
 if __name__ == '__main__':
+    """
+    主入口，执行所有的测试用例并生成测试报告
+    """
+
     report_path_exists = os.path.exists(core_config.report_path)
     if not report_path_exists:
         os.mkdir(core_config.report_path)
