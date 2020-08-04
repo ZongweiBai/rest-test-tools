@@ -24,3 +24,7 @@
 1. 自定义case文件夹下的excel；
 2. 自定义test_case下的测试用例，根据场景写单个测试用例或者组测试用例；
 3. 运行run_all_testcases.py获取结果；
+
+### 测试报告
+
+![测试结果](test_report.png)
